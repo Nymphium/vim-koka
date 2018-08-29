@@ -11,6 +11,9 @@ if !exists("main_syntax")
   let main_syntax='koka'
 endif
 
+let s:cpo_save = &cpo
+set cpo&vim
+
 syn match kokaSymbols /\$\|%\|&\|\*\|+\|~\|!\|\\\|\^\|#\|-\|?\|\/\|=\|\.\|:\|/
 syn match kokaOpServed "->"
 
@@ -80,7 +83,5 @@ if main_syntax == 'koka'
 endif
 
 let b:spell_options="contained"
-let &cpo = s:cpo_save
-unlet s:cpo_save
 
 " vim: ts=8
