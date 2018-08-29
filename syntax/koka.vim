@@ -16,6 +16,7 @@ set cpo&vim
 
 syn match kokaSymbols /\$\|%\|&\|\*\|+\|~\|!\|\\\|\^\|#\|-\|?\|\/\|=\|\.\|:\|/
 syn match kokaOpServed "->"
+syn match kokaUnderscore "_"
 
 syn keyword kokaTodo contained TODO FIXME XXX
 
@@ -53,7 +54,12 @@ syn region kokaEncl transparent matchgroup=kokaSymbols start="{" end="}" contain
 syn region kokaEncl transparent matchgroup=kokaSymbols start="(" end=")" contains=ALL
 syn region kokaEncl transparent matchgroup=kokaSymbols start="<" end=">" contains=ALL
 
-syn keyword kokaBoolean true false
+syn region  kokaString0		start=+"+ end=+"+ end=+$+
+
+syn keyword kokaBoolean True False
+syn match kokaConstr /[A-Z]\w\+/
+
+hi def link kokaType Type
 
 hi def link kokaFun Keyword
 hi def link kokaIf Keyword
@@ -67,14 +73,19 @@ hi def link kokaSymbols Operator
 
 hi def link kokaVisiblity Statement
 hi def link kokaBoolean Boolean
+hi def link kokaConstr Constant
 
 hi def link kokaEffect Identifier
 hi def link kokaHandler Identifier
 hi def link kokaHandle Identifier
 
-hi def link kokaComment Comment
+hi def link kokaUnderscore Whitespace
 
+hi def link kokaString0 String
+
+hi def link kokaComment Comment
 hi def link kokaTodo Todo
+
 
 let b:current_syntax = "koka"
 
