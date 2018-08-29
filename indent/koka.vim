@@ -1,1 +1,3 @@
-runtime! indent/c.vim
+" FIXME: currently use file of similar syntax language
+
+runtime! indent/scala.vim
