@@ -105,7 +105,7 @@ hi def link kokaBoolean Boolean
 hi def link kokaConstr Constant
 
 hi def link kokaEffect Identifier
-hi def link kokaHandler Identifier
+hi def link kokaHandleDef Identifier
 hi def link kokaHandle Identifier
 hi def link kokaReturn Statement
 
