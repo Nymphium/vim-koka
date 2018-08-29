@@ -24,7 +24,7 @@ syn keyword kokaTodo contained TODO FIXME XXX
 syn keyword kokaOperatorPriority infix infixr infixl prefix
 
 syn keyword kokaType type cotype rectype alias
-syn keyword kokaTypeMod open extend
+syn keyword kokaTypeMod open extend rec
 syn keyword kokaStruct struct
 syn keyword kokaConDef contained con
 syn keyword kokaEffect effect
@@ -41,8 +41,7 @@ syn keyword kokaReturn contained return
 
 syn keyword kokaTypeKeyrowds forall exists some
 
-syn keyword kokaFun fun
-syn keyword kokaFunction function
+syn keyword kokaFun fun function
 syn keyword kokaVisiblity public private
 syn keyword kokaInclude include
 syn keyword kokaModule module
@@ -51,30 +50,34 @@ syn keyword kokaModuleImport import
 syn keyword kokaIf contained if then else elsif
 syn keyword kokaMatch contained match
 
-syn cluster kokaToplevel contains=kokaModuleImport,kokaModule,kokaFunction,kokaTypes,kokaVisiblity,kokaAbstract
+" toplevel: ONLY appear in toplevel
+syn cluster kokaToplevel contains=kokaModuleImport,kokaModule,kokaTypes,kokaVisiblity,kokaAbstract
+
+syn match kokaConstr /\<[A-Z]\w\+\>/
+syn match kokaAnyID /\<\([a-z]\w\?\(-\?[a-zA-Z]\w*\)*['?]*-\?\)/
+
+syn match kokaUnderscore "_"
+
+syn match kokaChar /\('\(\\\([nrt\\"']\|x\x\{2\}\|u\x\{4\}\|U\x\4\)\|[^\\']\)'\)/
+syn match kokaChar0 /\(\\\([nrt\\"']\|x\x\{2\}\|u\x\{4\}\|U\x\4\)\|[^\\']\)/
+syn region  kokaString0 start=+"+ end=+"+ end=+$+
+syn region  kokaRawString start=+@"+ end=+"+ end=+$+
+syn cluster kokaString contains=kokaString0,kokaRawString,kokaChar
+
+syn match kokaNumber /\<0x\x+\>/
+syn match kokaNumber /\<\d\+\.\d+\>/
+syn match kokaNumber /\<\(\d\+\.\d+\([eE][\-]\d+\)\)\>/
 
 syn region kokaEncl transparent matchgroup=kokaSymbols start="{" end="}" contains=ALLBUT,kokaBraceErr,@kokaToplevel
 syn region kokaEncl transparent matchgroup=kokaSymbols start="(" end=")" contains=ALLBUT,kokaParenErr,@kokaToplevel
 syn region kokaEncl transparent matchgroup=kokaSymbols start="\[" end="\]" contains=ALLBUT,kokaSquareBraceErr,@kokaToplevel
 syn region kokaEncl transparent matchgroup=kokaSymbols start="<" end=">" contains=ALLBUT,kokaAngleBraceErr,@kokaToplevel
 
-syn match kokaConstr /\<[A-Z]\w\+\>/
-syn match kokaAnyID /\<\([a-z]\w\?\(-\?[a-zA-Z]\w*\)*['?]\?\)\>/
-
 syn match kokaSymbols /\$\|%\|&\|\*\|+\|\~\|!\|\\\|\^\|#\|-\|?\|\/\|=\|\.\|:\|<\|>\||\|;/
 syn match kokaOpServed "->"
-syn match kokaUnderscore "_"
-
-syn region  kokaString0 start=+"+ end=+"+ end=+$+
-syn region  kokaRawString start=+@"+ end=+"+ end=+$+
-syn match kokaChar /\('\(\\\([nrt\\"']\|x[0-9]\{2\}\|u[0-9]\{4\}\|U[0-9]\4\)\|[^\\']\)'\)/
-syn cluster kokaString contains=kokaString0,kokaRawString,kokaChar
 
 syn match kokaComment "//.*" contains=kokaTodo
 syn region kokaComment start="/\*" end="\*/" contains=kokaTodo
-
-syn match kokaNumber /\<\d\+\.\d+\>/
-syn match kokaNumber /\<\(\d\+\.\d+\([eE][\-]\d+\)\)\>/
 
 syn keyword kokaBoolean True False
 
@@ -82,10 +85,9 @@ hi def link kokaType Type
 hi def link kokaTypeMod Type
 hi def link kokaStruct Type
 hi def link kokaConDef Type
-hi def link kokaEffect Type
+hi def link kokaEffect Identifier
 
 hi def link kokaFun Keyword
-hi def link kokaFunction Keyword
 hi def link kokaIf Keyword
 hi def link kokaMatch Keyword
 
@@ -105,8 +107,8 @@ hi def link kokaBoolean Boolean
 hi def link kokaConstr Constant
 
 hi def link kokaEffect Identifier
-hi def link kokaHandleDef Identifier
-hi def link kokaHandle Identifier
+hi def link kokaHandleDef Delimiter
+hi def link kokaHandle Delimiter
 hi def link kokaReturn Statement
 
 hi def link kokaUnderscore Whitespace
