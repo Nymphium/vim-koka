@@ -58,8 +58,8 @@ syn match kokaAnyID /\<\([a-z]\w\?\(-\?[a-zA-Z]\w*\)*['?]*-\?\)/
 
 syn match kokaUnderscore "_"
 
-syn match kokaChar /\('\(\\\([nrt\\"']\|x\x\{2\}\|u\x\{4\}\|U\x\4\)\|[^\\']\)'\)/
-syn match kokaChar0 /\(\\\([nrt\\"']\|x\x\{2\}\|u\x\{4\}\|U\x\4\)\|[^\\']\)/
+syn match kokaChar /\('\(\\\([nrt\\"']\|x\x\{2\}\|u\x\{4\}\|U\x\{4\}\)\|[^\\']\)'\)/
+syn match kokaChar0 /\(\\\([nrt\\"']\|x\x\{2\}\|u\x\{4\}\|U\x\{4\}\)\|[^\\']\)/
 syn region  kokaString0 start=+"+ end=+"+ end=+$+
 syn region  kokaRawString start=+@"+ end=+"+ end=+$+
 syn cluster kokaString contains=kokaString0,kokaRawString,kokaChar
